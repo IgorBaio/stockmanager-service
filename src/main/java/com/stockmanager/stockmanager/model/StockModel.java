@@ -32,7 +32,7 @@ public class StockModel {
         this.base = base;
         this.quantity = quantity;
         this.supplier = supplier;
-        this.creationAt = LocalDate.now().toString();
+        this.creationAt = LocalDateTime.now().toString();
         this.lastUserUsed = lastUserUsed;
     }
 
