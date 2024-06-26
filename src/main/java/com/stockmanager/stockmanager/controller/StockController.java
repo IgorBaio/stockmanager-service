@@ -1,16 +1,15 @@
 package com.stockmanager.stockmanager.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.stockmanager.stockmanager.dto.StockRequestDTO;
 import com.stockmanager.stockmanager.model.StockModel;
 import com.stockmanager.stockmanager.service.StockService;
 import com.stockmanager.stockmanager.service.UserService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/stock")
@@ -23,7 +22,7 @@ public class StockController {
     private UserService userService;
 
     @PutMapping("/save")
-    public String save(@RequestParam String email, @RequestBody StockRequestDTO stockRequestDTO) {
+    public String save(@RequestParam String email, @RequestBody List<StockRequestDTO> stockRequestDTO) {
 
         Boolean hasUser = userService.hasUser(email);
         if (hasUser) {
@@ -38,5 +37,24 @@ public class StockController {
 
         return "Usuário não encontrado";
     }
+
+    @GetMapping
+    public List<StockModel> getProducts(@RequestParam String email, @RequestParam String base){
+        Boolean hasUser = userService.hasUser(email);
+        if (hasUser) {
+            var itemsSaved = stockService.get(email, base);
+
+            if (itemsSaved != null) {
+                return itemsSaved;
+            }
+
+            return List.of();
+        }
+        return null;
+    }
+
+
+
+
 
 }
