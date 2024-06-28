@@ -1,16 +1,14 @@
 package com.stockmanager.stockmanager.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.stockmanager.stockmanager.dto.StockRequestDTO;
 import com.stockmanager.stockmanager.model.StockModel;
-import com.stockmanager.stockmanager.model.UserModel;
 import com.stockmanager.stockmanager.repository.StockRepository;
-import com.stockmanager.stockmanager.repository.UserRepository;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class StockService {
@@ -66,7 +64,6 @@ public class StockService {
             return stockSaved;
 
         } catch (Exception e) {
-            // TODO: handle exception
             return null;
         }
 
